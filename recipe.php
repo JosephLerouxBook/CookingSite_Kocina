@@ -1,10 +1,11 @@
+<?php include('php/connexion.php');?>
 <!DOCTYPE html>
 <html lang="en-gb" dir="ltr">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Recipe | Cooking Recipe HTML Template</title>
+  <title>La cuisine des Leroux</title>
   <link rel="shortcut icon" type="image/png" href="img/favicon.png" >
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Leckerli+One&display=swap" rel="stylesheet">
@@ -13,12 +14,13 @@
 </head>
 
 <body>
-
+<div>
+</div>
 <nav class="uk-navbar-container uk-letter-spacing-small">
   <div class="uk-container">
     <div class="uk-position-z-index" data-uk-navbar>
       <div class="uk-navbar-left">
-        <a class="uk-navbar-item uk-logo" href="index.html">Kocina</a>
+        <a class="uk-navbar-item uk-logo" href="index.html">La cuisine des Leroux</a>
         <ul class="uk-navbar-nav uk-visible@m uk-margin-large-left">
           <li ><a href="index.html">Home</a></li>
           <li class="uk-active"><a href="recipe.html">Recipe</a></li>
@@ -33,36 +35,34 @@
 <div class="uk-container">
   <div data-uk-grid>
     <div class="uk-width-1-2@s">
-      <div><img class="uk-border-rounded-large" src="https://via.placeholder.com/600x600" 
+      <div><img class="uk-border-rounded-large" src="<?php echo $img ?>" 
         alt="Image alt"></div>
     </div>
     <div class="uk-width-expand@s uk-flex uk-flex-middle">
       <div>
-        <h1>[TITRE]</h1>
-        <p>[DESCRIPTION]
-          Supermarket brands of ricotta contain stabilizers, which can give the cheese a gummy texture when baked. Check 
-          the label and choose ricotta made with as few ingredients as possible.</p>
+        <h1><?php echo $nomRecette; ?></h1>
+        <p><?php echo $description;?></p>
         <div class="uk-margin-medium-top uk-child-width-expand uk-text-center uk-grid-divider" data-uk-grid>
           <div>
             <span data-uk-icon="icon: clock; ratio: 1.4"></span>
-            <h5 class="uk-text-500 uk-margin-small-top uk-margin-remove-bottom">Active Time</h5>
-            <span class="uk-text-small">20 mins</span>
+            <h5 class="uk-text-500 uk-margin-small-top uk-margin-remove-bottom">Temps de préparation</h5>
+            <span class="uk-text-small"><?php echo $activeTime;?>min</span>
           </div>
           <div>
             <span data-uk-icon="icon: future; ratio: 1.4"></span>
-            <h5 class="uk-text-500 uk-margin-small-top uk-margin-remove-bottom">Total Time</h5>
-            <span class="uk-text-small">50 mins</span>
+            <h5 class="uk-text-500 uk-margin-small-top uk-margin-remove-bottom">Temps total</h5>
+            <span class="uk-text-small"><?php echo $totalTime;?>mins</span>
           </div>
           <div>
             <span data-uk-icon="icon: users; ratio: 1.4"></span>
-            <h5 class="uk-text-500 uk-margin-small-top uk-margin-remove-bottom">Yield</h5>
-            <span class="uk-text-small">Serves 4</span>
+            <h5 class="uk-text-500 uk-margin-small-top uk-margin-remove-bottom">Nombre de personnes</h5>
+            <span class="uk-text-small"><?php echo $nbrPersonne;?> personnes</</span>
           </div>
         </div>
         <hr>
         <div data-uk-grid>
           <div class="uk-width-auto@s uk-text-small">
-            <p class="uk-margin-small-top uk-margin-remove-bottom">Created by <a href="#">Alex Williamns</a></p>
+            <p class="uk-margin-small-top uk-margin-remove-bottom">Created by <a href="#"><?php echo $fullname;?></a></p>
             <span class="uk-text-muted">21 recipes</span>
           </div>
         </div>
@@ -76,55 +76,9 @@
     <div class="uk-grid-large" data-uk-grid>
       <div class="uk-width-expand@m">
         <div class="uk-article">
-          <h3>How to Make It</h3>
-          <div id="step-1" class="uk-grid-small uk-margin-medium-top" data-uk-grid>
-            <div class="uk-width-auto">
-              <a href="#" class="uk-step-icon" data-uk-icon="icon: check; ratio: 0.8" 
-                data-uk-toggle="target: #step-1; cls: uk-step-active"></a>
-            </div>
-            <div class="uk-width-expand">
-              <h5 class="uk-step-title uk-text-500 uk-text-uppercase uk-text-primary" data-uk-leader="fill:—">1. Step</h5>
-              <div class="uk-step-content">Labour, of evaluated would he the a the our what is in the arduous sides behavioural is which the 
-                have didn't kicked records the it framework by the for traveler sure the can most well her. 
-                Entered have break himself cheek, and activity, for bit of text.</div>
-            </div>
-          </div>
-          <div id="step-2" class="uk-grid-small uk-margin-medium-top" data-uk-grid>
-            <div class="uk-width-auto">
-              <a href="#" class="uk-step-icon" data-uk-icon="icon: check; ratio: 0.8" 
-                data-uk-toggle="target: #step-2; cls: uk-step-active"></a>
-            </div>
-            <div class="uk-width-expand">
-              <h5 class="uk-step-title uk-text-500 uk-text-uppercase uk-text-primary" data-uk-leader="fill:—">2. Step</h5>
-              <div class="uk-step-content">Labour, of evaluated would he the a the our what is in the arduous sides behavioural is which the 
-                have didn't kicked records the it framework by the for traveler sure the can most well her. 
-                Entered have break himself cheek, and activity, for bit of text.</div>
-            </div>
-          </div>
-          <div id="step-3" class="uk-grid-small uk-margin-medium-top" data-uk-grid>
-            <div class="uk-width-auto">
-              <a href="#" class="uk-step-icon" data-uk-icon="icon: check; ratio: 0.8" 
-                data-uk-toggle="target: #step-3; cls: uk-step-active"></a>
-            </div>
-            <div class="uk-width-expand">
-              <h5 class="uk-step-title uk-text-500 uk-text-uppercase uk-text-primary" data-uk-leader="fill:—">3. Step</h5>
-              <div class="uk-step-content">Labour, of evaluated would he the a the our what is in the arduous sides behavioural is which the 
-                have didn't kicked records the it framework by the for traveler sure the can most well her. 
-                Entered have break himself cheek, and activity, for bit of text.</div>
-            </div>
-          </div>
-          <div id="step-4" class="uk-grid-small uk-margin-medium-top" data-uk-grid>
-            <div class="uk-width-auto">
-              <a href="#" class="uk-step-icon" data-uk-icon="icon: check; ratio: 0.8" 
-                data-uk-toggle="target: #step-4; cls: uk-step-active"></a>
-            </div>
-            <div class="uk-width-expand">
-              <h5 class="uk-step-title uk-text-500 uk-text-uppercase uk-text-primary" data-uk-leader="fill:—">4. Step</h5>
-              <div class="uk-step-content">Labour, of evaluated would he the a the our what is in the arduous sides behavioural is which the 
-                have didn't kicked records the it framework by the for traveler sure the can most well her. 
-                Entered have break himself cheek, and activity, for bit of text.</div>
-            </div>
-          </div>
+          <h3>Comment faire ?</h3>
+          <?php etapesCreator($connexion);?>
+          
           <hr class="uk-margin-medium-top uk-margin-large-bottom">
           
         </div>
@@ -132,16 +86,7 @@
       <div class="uk-width-1-3@m">
         <h3>Ingredients</h3>
         <ul class="uk-list uk-list-large uk-list-divider uk-margin-medium-top">
-          <li>1 pound fresh prepared pizza dough</li>
-          <li>6 ounces shredded mozzarella cheese</li>
-          <li>3/4 cup of ricotta cheese</li>
-          <li>1 large egg yolk</li>
-          <li>1/2 teaspoon lemon zest</li>
-          <li>2 finely grated garlic cloves</li>
-          <li>1/2 teaspoon kosher salt</li>
-          <li>1/4 teaspoon black pepper</li>
-          <li>1 large egg</li>
-          <li>1 teaspoon dried Italian seasoning</li>
+          <?php ingredientCreator($connexion)?>
         </ul>
         <h3 class="uk-margin-large-top">Tags</h3>
         <div class="uk-margin-medium-top" data-uk-margin>
