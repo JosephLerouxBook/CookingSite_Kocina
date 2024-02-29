@@ -1,66 +1,58 @@
 <?php
-
+require 'conexion.php';
 $connexion = dbconexion();
 
-// Récupération de la recette
-$sql = "SELECT * FROM recette"; // Requette SQL
-$resultat = mysqli_query($connexion, $sql); // Execution de la requette
-if (mysqli_num_rows($resultat) > 0) { // Vérifier si la requête a renvoyé des résultats
-    while($ligne = mysqli_fetch_assoc($resultat)) {    // Parcourir les résultats et afficher les données
-        //echo "ID: " . $ligne["idR"] . " - Nom: " . $ligne["nomRecette"] . " - activeTime: " . $ligne["activeTime"] . "<br>";
-        $idrecette = $ligne["idR"];
-        $nomRecette = $ligne["nomRecette"];
-        $description = $ligne["description"];
-        $activeTime = $ligne["activeTime"];
-        $totalTime = $ligne["totalTime"];
-        $nbrPersonne  = $ligne["nbrPersonne"];
-        $img = $ligne["imgSrc"];
+if(isset($_POST['id'])) {
+    $id = $_POST['id'];
+    // Récupération de la recette
+    $sql = "SELECT * FROM recette where idR=$id"; // Requette SQL
+    $resultat = mysqli_query($connexion, $sql); // Execution de la requette
+    if (mysqli_num_rows($resultat) > 0) { // Vérifier si la requête a renvoyé des résultats
+        while($ligne = mysqli_fetch_assoc($resultat)) {    // Parcourir les résultats et afficher les données
+            //echo "ID: " . $ligne["idR"] . " - Nom: " . $ligne["nomRecette"] . " - activeTime: " . $ligne["activeTime"] . "<br>";
+            $idrecette = $ligne["idR"];
+            $nomRecette = $ligne["nomRecette"];
+            $description = $ligne["description"];
+            $activeTime = $ligne["activeTime"];
+            $totalTime = $ligne["totalTime"];
+            $nbrPersonne  = $ligne["nbrPersonne"];
+            $img = $ligne["imgSrc"];
+        }
+    } else {
+        return "Aucun résultat trouvé.";
     }
-} else {
-    return "Aucun résultat trouvé.";
+
+    // Récupération du créateur
+    $sql_createur = "SELECT *
+    FROM createur
+    INNER JOIN recrea ON createur.idCreator = recrea.idCreateur
+    INNER JOIN recette ON recrea.idRec = recette.idR
+    WHERE recette.idR=$id;";
+    $resultat_createur = mysqli_query($connexion, $sql_createur);
+    if (mysqli_num_rows($resultat_createur) > 0) {
+        while($ligne = mysqli_fetch_assoc($resultat_createur)) {
+            //echo "ID: " . $ligne["idCreator"] . " - Nom: " . $ligne["nom"] . " - activeTime: " . $ligne["prenom"] . "<br>";
+            $nom = $ligne["nom"];
+            $prenom = $ligne["prenom"];
+            $fullname = $nom ." ". $prenom;
+        }
+    } else {
+        return "Aucun résultat trouvé.";
+    }
+// Faites quelque chose avec l'ID récupéré
+} 
+else {
+    echo "Aucun ID n'a été envoyé.";
 }
 
-// Récupération du créateur
-$sql_createur = "SELECT *
-FROM createur
-INNER JOIN recrea ON createur.idCreator = recrea.idCreateur
-INNER JOIN recette ON recrea.idRec = recette.idR;";
-$resultat_createur = mysqli_query($connexion, $sql_createur);
-if (mysqli_num_rows($resultat_createur) > 0) {
-    while($ligne = mysqli_fetch_assoc($resultat_createur)) {
-        //echo "ID: " . $ligne["idCreator"] . " - Nom: " . $ligne["nom"] . " - activeTime: " . $ligne["prenom"] . "<br>";
-        $nom = $ligne["nom"];
-        $prenom = $ligne["prenom"];
-        $fullname = $nom ." ". $prenom;
-    }
-} else {
-    return "Aucun résultat trouvé.";
-}
 
 
-
-
-function dbconexion(){
-    $server = 'localhost';
-    $username = 'root';
-    $password = '';
-    $bdd = 'cuisineleroux';
-
-    // Connexion à la base de données
-    $connexion = mysqli_connect($server, $username, $password, $bdd);
-
-    // Vérifier la connexion
-    if (!$connexion) {
-        die("La connexion à la base de données a échoué : " . mysqli_connect_error());
-    }
-    else {return $connexion;}
-}
-
-function ingredientCreator($connexion){
+function ingredientCreator($connexion, $id){
     $sql = "SELECT *
     FROM ingredients
     INNER JOIN recing ON ingredients.idIngr = recing.idIng
-    INNER JOIN recette ON recing.idRec = recette.idR;";
+    INNER JOIN recette ON recing.idRec = recette.idR
+    WHERE recette.idR=$id;";
     $resultat = mysqli_query($connexion, $sql);
     // Vérifier si la requête a renvoyé des résultats
     if (mysqli_num_rows($resultat) > 0) {
@@ -83,11 +75,12 @@ function ingredientCreator($connexion){
 }
 
 
-function etapesCreator($connexion){
+function etapesCreator($connexion, $id){
     $sql = "SELECT * FROM etapes
     INNER JOIN recetape ON etapes.idEtape = recetape.idEtape 
     INNER JOIN recette ON recetape.idRec = recette.idR 
-    ORDER BY etapes.numEtape ASC";
+    WHERE recette.idR=$id
+    ORDER BY etapes.numEtape ASC;";
     $resultat = mysqli_query($connexion, $sql);
     // Vérifier si la requête a renvoyé des résultats
     if (mysqli_num_rows($resultat) > 0) {
@@ -110,10 +103,5 @@ function etapesCreator($connexion){
     else {
         return "Aucun résultat trouvé.";
     }
-
-
-
 }
-
-
 ?>

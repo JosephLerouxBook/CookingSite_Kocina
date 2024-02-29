@@ -1,4 +1,4 @@
-<?php include('php/connexion.php');?>
+<?php include('php/recetteCreator.php');?>
 <!DOCTYPE html>
 <html lang="en-gb" dir="ltr">
 
@@ -20,12 +20,12 @@
   <div class="uk-container">
     <div class="uk-position-z-index" data-uk-navbar>
       <div class="uk-navbar-left">
-        <a class="uk-navbar-item uk-logo" href="index.html">La cuisine des Leroux</a>
+        <a class="uk-navbar-item uk-logo" href="index.php">La cuisine des Leroux</a>
         <ul class="uk-navbar-nav uk-visible@m uk-margin-large-left">
-          <li ><a href="index.html">Home</a></li>
-          <li class="uk-active"><a href="recipe.html">Recipe</a></li>
-          <li ><a href="search.html">Search</a></li>
-          <li ><a href="contact.html">Contact</a></li>
+          <li ><a href="index.php">Acceuil</a></li>
+          <li class="uk-active"><a href="recipe.html">Recette</a></li>
+          <li ><a href="search.html">Recherche</a></li>
+          <li ><a href="contact.html">Contacts</a></li>
         </ul>
       </div>
     </div>
@@ -77,7 +77,7 @@
       <div class="uk-width-expand@m">
         <div class="uk-article">
           <h3>Comment faire ?</h3>
-          <?php etapesCreator($connexion);?>
+          <?php etapesCreator($connexion, $id);?>
           
           <hr class="uk-margin-medium-top uk-margin-large-bottom">
           
@@ -86,7 +86,7 @@
       <div class="uk-width-1-3@m">
         <h3>Ingredients</h3>
         <ul class="uk-list uk-list-large uk-list-divider uk-margin-medium-top">
-          <?php ingredientCreator($connexion)?>
+          <?php ingredientCreator($connexion, $id)?>
         </ul>
         <h3 class="uk-margin-large-top">Tags</h3>
         <div class="uk-margin-medium-top" data-uk-margin>
