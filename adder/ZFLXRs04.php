@@ -12,31 +12,40 @@ function optionCreator($connexion){
             var addSelectBtn = document.getElementById('addIng');
             var container = document.getElementById('ingContainer');
 
-            addSelectBtn.addEventListener('click', function() {
-                var selectElement = document.createElement('select');
+            addSelectBtn.addEventListener('click', function() { 
+                var labelElement = document.createElement('label');  //label des ingredients
+                labelElement.textContent = 'Quel quantité pour cette ingrédient : ';
+                container.appendChild(labelElement);
 
-                // Ajoutez ici les attributs souhaités pour votre élément <select>
+                var inputElement = document.createElement('input');  //input des ingredient (quantité)
+                inputElement.type = 'text';
+                inputElement.name = 'ingredientQ[]'; // Le nom du champ input
+                container.appendChild(inputElement);
+
+                var selectElement = document.createElement('select'); //selected option menu deroulant
                 selectElement.id = 'newSelect';
-                selectElement.name = 'newSelect[]';";
+                selectElement.name = 'newSelect[]';"; //stock les id des differents ingredients choisi
 
     if (mysqli_num_rows($resultat) > 0) { // Vérifier si la requête a renvoyé des résultats
         while($ligne = mysqli_fetch_assoc($resultat)) {    // Parcourir les résultats et afficher les données
             $nomIngr = $ligne['nomIngredient'];
             $metric = $ligne['metric'];
             $idIngr = $ligne['idIngr'];
-            $fullIngr = $nomIngr.";".$metric.";".$idIngr;
+            $fullIngr = $nomIngr.", ".$metric;
             echo " // Créez une ou plusieurs options et ajoutez-les à l'élément <select>
                 var option1 = document.createElement('option');
-                option1.value = '".$fullIngr."';
+                option1.value = '".$idIngr."';
                 option1.text = '".$fullIngr."';
-                selectElement.add(option1);";
+                selectElement.add(option1);";  
         }
     } else {
         return "R.I.P :  Aucun Ingredients trouvé. Verifiez la BDD.";
     }
 
     echo " // Ajoutez l'élément <select> au conteneur
-                container.appendChild(selectElement);
+            container.appendChild(selectElement);
+            var lineBreak = document.createElement('br');
+            container.appendChild(lineBreak);
             });
         });
     </script>";
