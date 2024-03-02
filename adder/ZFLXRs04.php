@@ -67,7 +67,7 @@ function optionCreator($connexion){
     <input type="text" id="titre" name="titre" placeholder="Titre de votre recette"/>
     <br><br>
     <label for="description">Description :</label><br>
-    <textarea name="description" rows="10" cols="30">Description de votre recette</textarea>   
+    <textarea name="description" rows="10" cols="30" placeholder="tRentrer une description de votre recette"></textarea>   
     <br><br>
     <label for="activeTime">Temps de préparation :</label><br>
     <input type="text" id="activeTime" name="activeTime" placeholder="Temps necessaire a cuisiner"/>

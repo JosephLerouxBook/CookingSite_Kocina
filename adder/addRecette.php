@@ -42,7 +42,7 @@ if (isset($_POST['ingredientQ']) && !empty($_POST['ingredientQ'])) {
 
 //Envoie des information de bases dbo.recette
 $sql = "INSERT INTO `recette` (`idR`, `nomRecette`, `description`, `activeTime`, `totalTime`, `nbrPersonne`, `tags`, `imgSrc`) VALUES (NULL, $titre, $description, $activeTime, $totalTime, $nbrPerson, '', './src/img/1-Omelette-au-safran.jpg')";
-//echo $sql;
+echo $sql;
 $resultat = mysqli_query($connexion, $sql);     //Envoie la requette a la BDD
 if($resultat == true){      //Verifie que la requette c'est bien passer, affiche une ligne en fonction
     echo "<br>La requete dbo.recette est un succes !";
